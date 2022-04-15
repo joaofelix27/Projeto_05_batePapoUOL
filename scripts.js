@@ -1,5 +1,22 @@
 let dados
 let statusCode=0
+let tratarSucesso = resposta => { 
+    statusCode = resposta.status;
+    setInterval(() => {
+        axios.post ("https://mock-api.driven.com.br/api/v6/uol/status",dados);
+    },4000);
+        
+    if (statusCode ==200){
+       setInterval(recebemensagens,3000)
+    } else {
+        requisição();
+    }
+};
+let tratarErro= erro => {
+    statusCode=erro.response.status
+    requisição()
+}
+
 function requisição () {
     let nome_prompt = prompt("Qual o nome do usuário?")
      dados = {
@@ -12,26 +29,48 @@ function requisição () {
 }
 requisição ()
 //O programa ta saindo do while antes da respota do sucesso ou catch
-
-function tratarSucesso(resposta) { 
-    statusCode = resposta.status;
-    alert(statusCode)
-    alert("DEU BOM")
-    setInterval(online,3000)
-    if (statusCode !==200){
-        requisição()
+let tratarSucesso1 = elemento => { 
+    const conteudoelemento =elemento.data
+    const conteudogeral = document.querySelector(".conteudo_geral")
+    conteudogeral.innerHTML=""
+    console.log(conteudoelemento.length)
+    for (let i=0;i<conteudoelemento.length;i++){
+        switch (conteudoelemento[i].type){
+            case 'status':
+                conteudogeral.innerHTML+=`<div class="mensagem status">
+                ${conteudoelemento[i].time} ${conteudoelemento[i].from} ${conteudoelemento[i].text} 
+                </div>`
+                
+            break;
+            case 'message':
+                conteudogeral.innerHTML+=`<div class="mensagem message">
+                ${conteudoelemento[i].time} ${conteudoelemento[i].from} para ${conteudoelemento[i].to}: ${conteudoelemento[i].text} 
+                </div>`
+            break;
+            case 'private_message':
+                conteudogeral.innerHTML+=`<div class="mensagem private_message">
+                ${conteudoelemento[i].time} ${conteudoelemento[i].from} reservadamente para ${conteudoelemento[i].to}: ${conteudoelemento[i].text} 
+                </div>`
+            break;
+            
+        }
+       
     }
+    const total = document.querySelectorAll(".mensagem")
+    console.log(total)
+    total[conteudoelemento.length-1].classList.add("ultimo")
+    const ultimo = document.querySelector(".ultimo")
+    console.log(ultimo)
+    ultimo.scrollIntoView()
+  };
+  let tratarErro1= () => {
+      requisição()
+  }
+
+let recebemensagens = () => {
+    console.log("ta indo")
+    const requisição= axios.get("https://mock-api.driven.com.br/api/v6/uol/messages")
+    requisição.then(tratarSucesso1);
+    requisição.catch(tratarErro1);
 }
 
-function tratarErro(erro) {
-    statusCode=erro.response.status
-    alert(statusCode)
-    alert("DEU RUIM")
-    requisição()
-//   alert("Status code: " + erro.response.status); // Ex: 404
-// 	alert("Mensagem de erro: " + erro.response.data); // Ex: Not Found
-}
- function online () {
-    const online = axios.post ("https://mock-api.driven.com.br/api/v6/uol/status",dados)
-    alert("acho que foi!")
- }
