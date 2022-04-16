@@ -1,3 +1,8 @@
+body{
+    font-family: 'Encode Sans', sans-serif;
+font-family: 'Righteous', cursive;
+font-family: 'Roboto', sans-serif;
+}
 .container_topo{
 height: 80px;
 width: 100%;
@@ -9,6 +14,54 @@ align-items: center;
 position: fixed;
 top: 0;
 left: 0;
+display: none;
+}
+.container_entrada{
+    margin: 0 auto;
+    width: 100%;
+}
+.entrada{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.input_entrada{
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0em;
+    color: #aeaeae;
+    height: 54px;
+    width: 261px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: 1px solid #D7D7D7;
+    margin-top: 94px;
+    margin-bottom: 15px;
+     text-align: center;
+}
+.entrada button{
+    height: 45px;
+    width: 109px;
+    border-radius: 9px;
+    background-color: #e7e7e7;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #696969;
+    border: 1px solid #e7e7e7;
+
+
+    
+}
+.img_entrada{
+    width: 130px;
+    margin-top: 72px;
 }
 .person{
     font-size: 42px;
@@ -37,9 +90,35 @@ border: 0;
     margin-top: 106px;
     box-sizing: border-box;
     margin-bottom: 90px;
+    display: none;
+   
 }
 .mensagem{
     width: 100%;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+}
+.tempo{
+font-family: Roboto;
+font-size: 14px;
+font-weight: 400;
+line-height: 16px;
+letter-spacing: 0em;
+color: #aaaaaa;
+font-family: Roboto;
+font-size: 14px;
+font-weight: 400;
+line-height: 16px;
+letter-spacing: 0em;
+margin: 0 10px;
+box-sizing: border-box;
+}
+.texto{
+
+    margin: 0 5px;
 }
 .message{
     height: 40px;
@@ -50,8 +129,13 @@ border: 0;
     padding: 0 8px;
     box-sizing: border-box;
     margin-bottom: 4px;
-}
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
 
+}
 .status{
     height: 40px;
     width: 100%;
@@ -61,6 +145,11 @@ border: 0;
     padding: 0 8px;
     box-sizing: border-box;
     margin-bottom: 4px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
 }
 .private_message{
     height: 40px;
@@ -71,6 +160,11 @@ border: 0;
     box-sizing: border-box;
     background-color: #FFDEDE;
     margin-bottom: 4px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
 }
 .container_inferior{
     height: 80px;
@@ -86,7 +180,16 @@ border: 0;
     box-sizing: border-box;
     padding-right: 25px;
     padding-left: 17px; 
+    display: none;
 }
 .ultimo{
     background-color: green;
+}
+strong{
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: 0em;
+    color: black;
 }

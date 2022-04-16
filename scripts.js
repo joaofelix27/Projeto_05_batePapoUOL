@@ -1,11 +1,18 @@
 let dados
 let statusCode=0
-let tratarSucesso = resposta => { 
+const containertopo=document.querySelector(".container_topo")
+const containerinferior=document.querySelector(".container_inferior")
+const conteudogeral=document.querySelector(".conteudo_geral")
+const containerentrada=document.querySelector(".container_entrada")
+const tratarSucesso = resposta => { 
     statusCode = resposta.status;
     setInterval(() => {
         axios.post ("https://mock-api.driven.com.br/api/v6/uol/status",dados);
     },4000);
-        
+    containertopo.style.display="flex"
+    containerinferior.style.display="flex"
+    conteudogeral.style.display="inherit"
+    containerentrada.style.display="none"
     if (statusCode ==200){
        setInterval(recebemensagens,3000)
     } else {
@@ -14,20 +21,19 @@ let tratarSucesso = resposta => {
 };
 let tratarErro= erro => {
     statusCode=erro.response.status
-    requisição()
+    alert("nome inválido")
 }
-
+let nome=""
 function requisição () {
-    let nome_prompt = prompt("Qual o nome do usuário?")
+    nome=document.querySelector(".input_entrada").value
      dados = {
-        name: nome_prompt
+        name: nome
       }
     const requisição= axios.post("https://mock-api.driven.com.br/api/v6/uol/participants",dados)
     requisição.then(tratarSucesso);
     requisição.catch(tratarErro);
  
 }
-requisição ()
 //O programa ta saindo do while antes da respota do sucesso ou catch
 let tratarSucesso1 = elemento => { 
     const conteudoelemento =elemento.data
@@ -38,18 +44,18 @@ let tratarSucesso1 = elemento => {
         switch (conteudoelemento[i].type){
             case 'status':
                 conteudogeral.innerHTML+=`<div class="mensagem status">
-                ${conteudoelemento[i].time} ${conteudoelemento[i].from} ${conteudoelemento[i].text} 
+                <p class=tempo>(${conteudoelemento[i].time})</p><p class="texto"><strong>${conteudoelemento[i].from}</strong></p> ${conteudoelemento[i].text} 
                 </div>`
                 
             break;
             case 'message':
                 conteudogeral.innerHTML+=`<div class="mensagem message">
-                ${conteudoelemento[i].time} ${conteudoelemento[i].from} para ${conteudoelemento[i].to}: ${conteudoelemento[i].text} 
+                <p class="tempo">(${conteudoelemento[i].time})</p><p class="texto"><strong>${conteudoelemento[i].from}</strong> para <strong>${conteudoelemento[i].to}</strong>:</p> ${conteudoelemento[i].text} 
                 </div>`
             break;
             case 'private_message':
                 conteudogeral.innerHTML+=`<div class="mensagem private_message">
-                ${conteudoelemento[i].time} ${conteudoelemento[i].from} reservadamente para ${conteudoelemento[i].to}: ${conteudoelemento[i].text} 
+               <p class="tempo">(${conteudoelemento[i].time})<p class="texto"><strong>${conteudoelemento[i].from}</strong> reservadamente para <strong>${conteudoelemento[i].to}</strong>:</p> ${conteudoelemento[i].text} 
                 </div>`
             break;
             
@@ -66,6 +72,10 @@ let tratarSucesso1 = elemento => {
   let tratarErro1= () => {
       requisição()
   }
+  let tratarErro2= () => {
+    alert("deu ruim")
+    window.location.reload()
+}
 
 let recebemensagens = () => {
     console.log("ta indo")
@@ -74,3 +84,14 @@ let recebemensagens = () => {
     requisição.catch(tratarErro1);
 }
 
+let enviarmensagens = () => {
+    let texto_mensagem=document.querySelector(".input_inferior")
+    let mensagem= {from: nome,
+    to: "Todos",
+    text: texto_mensagem.value ,
+    type: "message"}
+    const promisse= axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",mensagem);
+    texto_mensagem.value=""
+    promisse.then(recebemensagens);
+    promisse.catch(tratarErro2);
+}
