@@ -25,7 +25,17 @@ let tratarErro= erro => {
 }
 let nome=""
 function requisição () {
+    input=document.querySelector(".input_entrada")
     nome=document.querySelector(".input_entrada").value
+    input.addEventListener("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+          // Cancel the default action, if needed
+          event.preventDefault();
+          // Trigger the button element with a click
+          document.getElementById(".enviar").click();
+        }
+      });
      dados = {
         name: nome
       }
@@ -94,4 +104,14 @@ let enviarmensagens = () => {
     texto_mensagem.value=""
     promisse.then(recebemensagens);
     promisse.catch(tratarErro2);
+}
+function send() {
+    if(event.key === 'Enter') {
+        enviarmensagens()       
+    }
+}
+function send1() {
+    if(event.key === 'Enter') {
+        requisição()       
+    }
 }

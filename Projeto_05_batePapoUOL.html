@@ -15,7 +15,7 @@
     <div class="container_entrada">
         <div class="entrada">
             <img class="img_entrada" src="/Imagens/logo 2.png">
-            <input class="input_entrada" type="text" placeholder="Digite seu nome">
+            <input class="input_entrada" type="text" placeholder="Digite seu nome" onkeydown="send1(this)"  >
             <button onclick="requisição()" class="entrar">Entrar</button>
         </div>
     </div>
@@ -30,7 +30,7 @@
         </div>
     </div>
 <div class="container_inferior">
-    <input class="input_inferior" type="text" placeholder="Escreva aqui...">
+    <input class="input_inferior" type="text" placeholder="Escreva aqui..." onkeydown="send(this)">
     <ion-icon onclick="enviarmensagens()" class="enviar" name="paper-plane-outline"></ion-icon>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
