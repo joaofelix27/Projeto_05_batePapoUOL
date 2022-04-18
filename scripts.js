@@ -13,15 +13,12 @@ const tratarSucesso = resposta => {
     containerinferior.style.display="flex"
     conteudogeral.style.display="inherit"
     containerentrada.style.display="none"
-    if (statusCode ==200){
        setInterval(recebemensagens,3000)
-    } else {
-        requisição();
-    }
 };
 let tratarErro= erro => {
     statusCode=erro.response.status
     alert("Nome inválido, tente outro!")
+    window.location.reload()
 }
 let nome=""
 function requisição () {
@@ -70,12 +67,11 @@ let tratarSucesso1 = elemento => {
        
     }
     let total = document.querySelectorAll(".mensagem")
-    total[conteudoelemento.length-1].classList.add("ultimo")
+    total[total.length-1].classList.add("ultimo")
     let ultimo = document.querySelector(".ultimo")
-    if(ultimo1.innerHTML!==ultimo.innerHTML){
-        ultimo.scrollIntoView()
+    if (ultimo.innerHTML!==ultimo1.innerHTML){
+    ultimo.scrollIntoView()
     }
-    
   };
   let tratarErro1= () => {
       requisição()
