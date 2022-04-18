@@ -30,6 +30,12 @@ function requisição () {
      dados = {
         name: nome
       }
+    let carregando=document.querySelector(".carregando")
+    let entrar=document.querySelector(".entrar")
+    let inputentrada=document.querySelector(".input_entrada")
+    carregando.style.display="flex"
+    entrar.style.display="none"
+    inputentrada.style.display="none"
     const requisição= axios.post("https://mock-api.driven.com.br/api/v6/uol/participants",dados)
     requisição.then(tratarSucesso);
     requisição.catch(tratarErro);
