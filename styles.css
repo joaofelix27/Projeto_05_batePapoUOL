@@ -41,6 +41,7 @@ display: none;
     margin-top: 94px;
     margin-bottom: 15px;
      text-align: center;
+     outline: none;
 }
 .entrada button{
     height: 45px;
@@ -73,17 +74,22 @@ display: none;
 img{
     margin-left: 20px;
 }
-input{
+.input_inferior{
     height: 30px;
-width: 145px;
+width: 60%;
 font-family: Roboto;
 font-size: 18px;
 font-style: italic;
 font-weight: 400;
 line-height: 21px;
 color: black;
+outline: none;
 border: 0;
-
+box-shadow: 0px -4px 6px 0px #0000000D;
+}
+::placeholder{
+    color: black;
+    opacity: 1; 
 }
 .conteudo_geral{
     background-color: #e5e5e5;
@@ -91,7 +97,7 @@ border: 0;
     box-sizing: border-box;
     margin-bottom: 90px;
     display: none;
-   
+
 }
 .mensagem{
     width: 100%;
@@ -151,6 +157,7 @@ box-sizing: border-box;
     line-height: 16px;
     letter-spacing: 0em;
 }
+
 .private_message{
     height: 40px;
     width: 100%;
@@ -165,6 +172,13 @@ box-sizing: border-box;
     font-weight: 400;
     line-height: 16px;
     letter-spacing: 0em;
+}
+.carregando{
+    display: flex;
+    flex-direction: column;
+    display: none;
+    justify-content: center;
+    align-items: center;
 }
 .container_inferior{
     height: 80px;
@@ -181,9 +195,6 @@ box-sizing: border-box;
     padding-right: 25px;
     padding-left: 17px; 
     display: none;
-}
-.ultimo{
-    background-color: green;
 }
 strong{
     font-family: Roboto;

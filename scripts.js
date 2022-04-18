@@ -21,21 +21,12 @@ const tratarSucesso = resposta => {
 };
 let tratarErro= erro => {
     statusCode=erro.response.status
-    alert("nome inválido")
+    alert("Nome inválido, tente outro!")
 }
 let nome=""
 function requisição () {
     input=document.querySelector(".input_entrada")
     nome=document.querySelector(".input_entrada").value
-    input.addEventListener("keyup", function(event) {
-        // Number 13 is the "Enter" key on the keyboard
-        if (event.keyCode === 13) {
-          // Cancel the default action, if needed
-          event.preventDefault();
-          // Trigger the button element with a click
-          document.getElementById(".enviar").click();
-        }
-      });
      dados = {
         name: nome
       }
@@ -44,12 +35,11 @@ function requisição () {
     requisição.catch(tratarErro);
  
 }
-//O programa ta saindo do while antes da respota do sucesso ou catch
 let tratarSucesso1 = elemento => { 
-    const conteudoelemento =elemento.data
-    const conteudogeral = document.querySelector(".conteudo_geral")
+    let ultimo1 = document.querySelector(".ultimo")
+     conteudoelemento =elemento.data
+    let conteudogeral = document.querySelector(".conteudo_geral")
     conteudogeral.innerHTML=""
-    console.log(conteudoelemento.length)
     for (let i=0;i<conteudoelemento.length;i++){
         switch (conteudoelemento[i].type){
             case 'status':
@@ -64,31 +54,31 @@ let tratarSucesso1 = elemento => {
                 </div>`
             break;
             case 'private_message':
+                if (conteudoelemento[i].to=="Todos" || conteudoelemento[i].to==nome) {
                 conteudogeral.innerHTML+=`<div class="mensagem private_message">
                <p class="tempo">(${conteudoelemento[i].time})<p class="texto"><strong>${conteudoelemento[i].from}</strong> reservadamente para <strong>${conteudoelemento[i].to}</strong>:</p> ${conteudoelemento[i].text} 
                 </div>`
+                } 
             break;
-            
         }
        
     }
-    const total = document.querySelectorAll(".mensagem")
-    console.log(total)
+    let total = document.querySelectorAll(".mensagem")
     total[conteudoelemento.length-1].classList.add("ultimo")
-    const ultimo = document.querySelector(".ultimo")
-    console.log(ultimo)
-    ultimo.scrollIntoView()
+    let ultimo = document.querySelector(".ultimo")
+    if(ultimo1.innerHTML!==ultimo.innerHTML){
+        ultimo.scrollIntoView()
+    }
+    
   };
   let tratarErro1= () => {
       requisição()
   }
   let tratarErro2= () => {
-    alert("deu ruim")
     window.location.reload()
 }
 
 let recebemensagens = () => {
-    console.log("ta indo")
     const requisição= axios.get("https://mock-api.driven.com.br/api/v6/uol/messages")
     requisição.then(tratarSucesso1);
     requisição.catch(tratarErro1);
